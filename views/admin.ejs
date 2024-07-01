@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manager Dashboard</title>
+    <title>Admin Dashboard</title>
 </head>
 <body>
-    <h1>Welcome, <%= user.fullName %></h1>
+    <h1>Welcome, <%= user.fullName %> </h1>
+
+    <h2>Students</h2>
     <table border="1px">
         <thead>
             <tr>
@@ -15,7 +17,7 @@
                 <th>HSC Percentage</th>
                 <th>Email</th>
                 <th>File</th>
-                <th>Actions</th>
+                <th>Review status</th>
             </tr>
         </thead>
         <tbody>
@@ -26,17 +28,18 @@
                     <td><%= student.hscPercentage %></td>
                     <td><%= student.email %></td>
                     <td><a href="/students/download/<%= student._id %>">Download</a></td>
-                    <% if (student.status === "Pending") { %>
-                        <td>
-                            <a href="/manager/approve/<%= student._id %>">Approve</a>
-                            <a href="/manager/reject/<%= student._id %>">Reject</a>
-                        </td>
-                    <% } else { %>
-                        <td><%= student.status %></td>
-                    <% } %>
+                    <td><%= student.status %></td>
                 </tr>
             <% }) %>
         </tbody>
     </table>
+
+    <h2>Managers</h2>
+    <ul>
+        <% managers.forEach((manager) => { %>
+            <li><%= manager.fullName %></li>
+        <% }) %>
+    </ul>
+
 </body>
 </html>

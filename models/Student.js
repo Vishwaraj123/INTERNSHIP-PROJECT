@@ -15,7 +15,7 @@ const studentSchema = new mongoose.Schema({
     path: { type: String, required: true },
     size: { type: Number, required: true }
   },
-  status: { type: Boolean, required: true, default: false },
+  status: { type: String, required: true, default: "Pending" },
   reviewedBy: {type: String, default: null}
 });
 

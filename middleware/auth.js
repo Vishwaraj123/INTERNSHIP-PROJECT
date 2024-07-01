@@ -6,10 +6,29 @@ const Manager = require("../models/Manager");
 const Admin = require("../models/Admin");
 const SuperAdmin = require("../models/SuperAdmin");
 const { getAllStudents } = require("../controller/managerController");
+const { getAllManagers } = require("../controller/adminController")
+const managerRoutes = require("../routes/managerRoutes")
+const express = require("express")
+const app = express();
+const session = require('express-session');
+
+app.use(session({
+  secret: '1234',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false,
+    maxAge: 3600000
+  }
+}));
 
 // Function to generate JWT
 const generateToken = (user) => {
-  return jwt.sign({ id: user._id, username: user.username, role: user.role }, secretKey, { expiresIn: "1h" });
+  return jwt.sign(
+    { id: user._id, username: user.username, role: user.role },
+    secretKey,
+    { expiresIn: "1h" }
+  );
 };
 
 // Middleware to handle login
@@ -47,18 +66,26 @@ async function login(req, res) {
       return res.status(401).json({ message: "Invalid credentials." });
     }
 
+    // // Set the session for the manager
+    // if (role === "manager") {
+    //   req.session.userId = user._id;
+    //   req.session.role = role;
+    //   req.session.managerName = user.fullName; // store manager's full name in session
+    // }
+    const students = await getAllStudents();
+    const managers = await getAllManagers();
     const token = generateToken(user);
 
     res.header("Authorization", `Bearer ${token}`);
-
     switch (role) {
       case "student":
         return res.render("student", { user });
       case "manager":
-        const students = await getAllStudents();
+        
+        app.use("/manager", managerRoutes)
         return res.render("manager", { user, students });
       case "admin":
-        return res.render("admin", { user });
+        return res.render("admin", { user, students, managers });
       case "superadmin":
         return res.render("superadmin", { user });
       default:
@@ -75,7 +102,9 @@ function authenticate(req, res, next) {
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
-    return res.status(401).json({ message: "Authentication failed. No token provided." });
+    return res
+      .status(401)
+      .json({ message: "Authentication failed. No token provided." });
   }
 
   try {
@@ -92,7 +121,9 @@ function authenticate(req, res, next) {
 function checkRole(role) {
   return (req, res, next) => {
     if (req.user.role !== role) {
-      return res.status(403).json({ message: `Unauthorized access for role ${req.user.role}.` });
+      return res
+        .status(403)
+        .json({ message: `Unauthorized access for role ${req.user.role}.` });
     }
     next();
   };
@@ -102,11 +133,15 @@ function checkRole(role) {
 function authorize(roles) {
   return (req, res, next) => {
     if (!req.user) {
-      return res.status(401).json({ message: "Authentication failed. No user found." });
+      return res
+        .status(401)
+        .json({ message: "Authentication failed. No user found." });
     }
 
     if (!roles.includes(req.user.role)) {
-      return res.status(403).json({ message: `Unauthorized access for role ${req.user.role}.` });
+      return res
+        .status(403)
+        .json({ message: `Unauthorized access for role ${req.user.role}.` });
     }
 
     next();

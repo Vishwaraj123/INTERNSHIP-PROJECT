@@ -3,11 +3,10 @@ const Manager = require("../models/Manager");
 const Student = require("../models/Student");
 
 // Get all managers and students
-const getAllManagersStudents = async (req, res) => {
+const getAllManagers = async (req, res) => {
   try {
-    const managers = await Manager.find();
-    const students = await Student.find();
-    res.json({ managers, students });
+    const managers = await Manager.find({}).select("-password -__v"); // exclude password and __v fields
+    return managers;
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
@@ -31,6 +30,6 @@ const getApprovalStatus = async (req, res) => {
 };
 
 module.exports = {
-  getAllManagersStudents,
   getApprovalStatus,
+  getAllManagers
 };
