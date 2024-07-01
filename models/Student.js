@@ -16,7 +16,7 @@ const studentSchema = new mongoose.Schema({
     size: { type: Number, required: true }
   },
   status: { type: Boolean, required: true, default: false },
-  reviewedBy: {type: String, required: true, default: null}
+  reviewedBy: {type: String, default: null}
 });
 
 const Student = mongoose.model("Student", studentSchema);

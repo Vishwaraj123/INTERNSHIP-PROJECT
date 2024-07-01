@@ -1,6 +1,6 @@
 const Manager = require("../models/Manager");
 const Student = require("../models/Student");
-const studentController = require("../controller/studentController")
+const studentController = require("../controller/studentController");
 
 // Get all students and their details (for manager)
 exports.getAllStudents = async (req, res) => {
@@ -13,27 +13,25 @@ exports.getAllStudents = async (req, res) => {
   }
 };
 
-
-
 // approve a student
 exports.approveStudent = async (req, res) => {
   try {
     const id = req.params.id;
     const student = await Student.findById(id);
     if (!student) {
-      return res.status(404).send({ message: 'Student not found' });
+      return res.status(404).send({ message: "Student not found" });
     }
     student.status = true;
-    const manager = await Manager.findById(req.user._id); // get logged in manager
-    if (!manager) {
-      return res.status(404).send({ message: 'Manager not found' });
-    }
-    student.reviewedBy = manager.fullName;
+    // const manager = await Manager.findById(req.user._id); // get logged in manager
+    // if (!manager) {
+    //   return res.status(404).send({ message: "Manager not found" });
+    // }
+    // student.reviewedBy = manager.fullName;
     await student.save();
     res.send("Student approved");
   } catch (err) {
     console.error(err);
-    res.status(500).send({ message: 'Error approving student' });
+    res.status(500).send({ message: "Error approving student" });
   }
 };
 
@@ -43,15 +41,15 @@ exports.rejectStudent = async (req, res) => {
     const id = req.params.id;
     const student = await Student.findById(id);
     if (!student) {
-      return res.status(404).send({ message: 'Student not found' });
+      return res.status(404).send({ message: "Student not found" });
     }
     student.status = false;
-    const manager = await Manager.findById(req.user._id); // get logged in manager
-    student.reviewedBy = manager.fullName;
+    // const manager = await Manager.findById(req.user._id); // get logged in manager
+    // student.reviewedBy = manager.fullName;
     await student.save();
-    res.send("student rejected")
+    res.send("student rejected");
   } catch (err) {
     console.error(err);
-    res.status(500).send({ message: 'Error rejecting student' });
+    res.status(500).send({ message: "Error rejecting student" });
   }
 };
