@@ -7,12 +7,22 @@ const path = require("path");
 const authRoutes = require("./routes/authRoutes");
 const studentRoutes = require("./routes/studentRoutes");
 const managerRoutes = require("./routes/managerRoutes");
+const session = require('express-session');
 
 // Set up mongoose connection
 mongoose.connect("mongodb://localhost:27017/INTERNSHIP", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+// app.use(session({
+//   secret: '1234',
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: {
+//     secure: false,
+//     maxAge: 3600000
+//   }))
 
 // Set up view engine
 app.set("view engine", "ejs");

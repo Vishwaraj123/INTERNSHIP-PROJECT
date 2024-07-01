@@ -26,10 +26,14 @@
                     <td><%= student.hscPercentage %></td>
                     <td><%= student.email %></td>
                     <td><a href="/students/download/<%= student._id %>">Download</a></td>
-                    <td>
-                        <a href="/manager/approve/<%= student._id %>">Approve</a>
-                        <a href="/manager/reject/<%= student._id %>">Reject</a>
-                    </td>
+                    <% if (student.status === "Pending") { %>
+                        <td>
+                            <a href="/manager/approve/<%= student._id %>">Approve</a>
+                            <a href="/manager/reject/<%= student._id %>">Reject</a>
+                        </td>
+                    <% } else { %>
+                        <td><%= student.status %></td>
+                    <% } %>
                 </tr>
             <% }) %>
         </tbody>

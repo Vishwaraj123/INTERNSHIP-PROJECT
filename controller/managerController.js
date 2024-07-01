@@ -21,14 +21,14 @@ exports.approveStudent = async (req, res) => {
     if (!student) {
       return res.status(404).send({ message: "Student not found" });
     }
-    student.status = true;
-    // const manager = await Manager.findById(req.user._id); // get logged in manager
+    student.status = "Approved";
+    // const manager = await Manager.findById(req.session.userId); // get logged in manager
     // if (!manager) {
     //   return res.status(404).send({ message: "Manager not found" });
     // }
     // student.reviewedBy = manager.fullName;
     await student.save();
-    res.send("Student approved");
+    res.send(`<script>alert('Student approved');</script>`);
   } catch (err) {
     console.error(err);
     res.status(500).send({ message: "Error approving student" });
@@ -43,11 +43,11 @@ exports.rejectStudent = async (req, res) => {
     if (!student) {
       return res.status(404).send({ message: "Student not found" });
     }
-    student.status = false;
-    // const manager = await Manager.findById(req.user._id); // get logged in manager
+    student.status = "Rejected";
+    // const manager = await Manager.findById(req.session.userId); // get logged in manager
     // student.reviewedBy = manager.fullName;
     await student.save();
-    res.send("student rejected");
+    res.send("Student rejected");
   } catch (err) {
     console.error(err);
     res.status(500).send({ message: "Error rejecting student" });
