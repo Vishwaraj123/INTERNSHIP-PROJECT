@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, <%= user.fullName %></h1>
+    <table border="1px">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Username</th>
+                <th>HSC Percentage</th>
+                <th>Email</th>
+                <th>File</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% students.forEach((student) => { %>
+                <tr>
+                    <td><%= student.fullName %></td>
+                    <td><%= student.username %></td>
+                    <td><%= student.hscPercentage %></td>
+                    <td><%= student.email %></td>
+                    <td><a href="/students/download/<%= student._id %>">Download</a></td>
+                    <td>
+                        <a href="/manager/approve/<%= student._id %>">Approve</a>
+                        <a href="/manager/reject/<%= student._id %>">Reject</a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

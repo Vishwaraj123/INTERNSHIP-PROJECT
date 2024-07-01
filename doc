@@ -1,0 +1,50 @@
+Student Details
+Full name 
+dob
+email
+phone
+hsc percentage
+file
+INTERNSHIP_PROJECT/
+│
+├── config/
+│   └── config.js          # Configuration file (e.g., secret keys, database connection)
+│
+├── controllers/
+│   ├── adminController.js # Controller for admin actions
+│   ├── managerController.js # Controller for manager actions
+│   ├── studentController.js # Controller for student actions
+│   └── superAdminController.js # Controller for super admin actions
+│
+├── middleware/
+│   └── auth.js            # Authentication and authorization middleware
+│
+├── models/
+│   ├── Admin.js           # Model for Admin
+│   ├── Manager.js         # Model for Manager
+│   ├── Student.js         # Model for Student
+│   └── SuperAdmin.js      # Model for SuperAdmin
+│
+├── node_modules/
+│   └── ...                # Dependencies (installed via npm)
+│
+├── routes/
+│   ├── adminRoutes.js     # Routes for admin actions
+│   ├── managerRoutes.js   # Routes for manager actions
+│   ├── studentRoutes.js   # Routes for student actions
+│   └── superAdminRoutes.js # Routes for super admin actions
+│
+├── uploads/
+│   └── ...                # Uploaded files storage
+│
+├── views/
+│   ├── index.html         # Example HTML file
+│   ├── login.html         # Login page
+│   ├── register.html      # Register page
+│   └── ...                # Other HTML templates
+│
+├── app.js                 # Main application file
+├── connect.js             # Database connection setup
+├── package.json           # Package configuration (dependencies, scripts)
+├── package-lock.json      # Dependency lock file
+└── README.md              # Project documentation
