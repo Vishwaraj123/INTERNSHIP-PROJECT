@@ -1,82 +1,132 @@
 const SuperAdmin = require("../models/SuperAdmin");
 const Manager = require("../models/Manager");
 const Student = require("../models/Student");
+const Admin = require("../models/Admin");
 
 // CRUD operations for all users
-const getAllUsers = async (req, res) => {
+const getAllAdmins = async (req, res) => {
   try {
-    const managers = await Manager.find();
-    const students = await Student.find();
-    const superAdmins = await SuperAdmin.find();
-    res.json({ managers, students, superAdmins });
+    const admins = await Admin.find({}).select("-password -__v"); // exclude password and __v fields
+    return admins;
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: "Server Error" });
+  }
+};
+
+const createManager = async (req, res) => {
+  try {
+    const { fullName, username, password } = req.body;
+    const manager = new Manager({ fullName, username, password });
+    await manager.save();
+    res.send("Manager created successfully");
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
   }
 };
 
-const createUser = async (req, res) => {
-
+const createAdmin = async (req, res) => {
   try {
-    const { fullName, username, password, role } = req.body;
-    if (role === "manager") {
-      const manager = new Manager({ fullName, username, password });
-      await manager.save();
-      res.send("Manager created successfully");
-    } else if (role === "student") {
-      const student = new Student({ fullName, username, password });
-      await student.save();
-      res.send("Student created successfully");
-    } else {
-      const superAdmin = new SuperAdmin({ fullName, username, password });
-      await superAdmin.save();
-      res.send("Super Admin created successfully");
+    const { fullName, username, password } = req.body;
+    const admin = new Admin({ fullName, username, password });
+    await admin.save();
+    res.send("Admin created successfully");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+};
+const getEditManager = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const manager = await Manager.findById(id);
+    if (!manager) {
+      throw new Error("Manager not found");
     }
+    res.render('editManager', { manager });
   } catch (err) {
     console.error(err);
-    res.status(500).send("Server Error");
+    res.status(500).send({ message: "Server Error" });
   }
-  
 };
-
-const updateUser = async (req, res) => {
+const updateManager = async (req, res) => {
   const { id } = req.params;
-  const { fullName, username, password, role } = req.body;
+  const { fullName, username, password } = req.body;
   try {
-    if (role === "manager") {
-      const manager = await Manager.findByIdAndUpdate(id, { fullName, username, password }, { new: true });
-      if (!manager) {
-        return res.status(404).send("Manager not found");
-      }
-      res.json(manager);
-    } else if (role === "student") {
-      const student = await Student.findByIdAndUpdate(id, { fullName, username, password }, { new: true });
-      if (!student) {
-        return res.status(404).send("Student not found");
-      }
-      res.json(student);
-    } else {
-      const superAdmin = await SuperAdmin.findByIdAndUpdate(id, { fullName, username, password }, { new: true });
-      if (!superAdmin) {
-        return res.status(404).send("Super Admin not found");
-      }
-      res.json(superAdmin);
+    const manager = await Manager.findByIdAndUpdate(id, { fullName, username, password }, { new: true });
+    if (!manager) {
+      return res.status(404).send("Manager not found");
     }
+    res.send("Manager Updated Successfully");
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
   }
-
+};
+const getEditAdmin = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const admin = await Admin.findById(id);
+    if (!admin) {
+      throw new Error("Admin not found");
+    }
+    res.render('editAdmin', { admin });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: "Server Error" });
+  }
+};
+const updateAdmin = async (req, res) => {
+  const { id } = req.params;
+  const { fullName, username, password } = req.body;
+  try {
+    const admin = await Admin.findByIdAndUpdate(id, { fullName, username, password }, { new: true });
+    if (!admin) {
+      return res.status(404).send("Admin not found");
+    }
+    res.send("Admin updated Successfully");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
 };
 
-const deleteUser = async (req, res) => {
+const removeManager = async (req, res) => {
   const { id } = req.params;
   try {
-    const user = await SuperAdmin.findByIdAndDelete(id);
-    if (!user) {
-      return res.status(404).send("User not found");
+    const manager = await Manager.findByIdAndDelete(id);
+    if (!manager) {
+      return res.status(404).send("Manager not found");
     }
-    res.json(user);
+    res.send("Manager Removed");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+};
+
+const removeAdmin = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const admin = await Admin.findByIdAndDelete(id);
+    if (!admin) {
+      return res.status(404).send("Admin not found");
+    }
+    res.send("Admin Removed");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+};
+const removeStudent = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const student = await Student.findByIdAndDelete(id);
+    if (!student) {
+      return res.status(404).send("Student not found");
+    }
+    res.send("Student Removed");
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
@@ -84,8 +134,14 @@ const deleteUser = async (req, res) => {
 };
 
 module.exports = {
-  getAllUsers,
-  createUser,
-  updateUser,
-  deleteUser,
+  getAllAdmins,
+  createManager,
+  createAdmin,
+  updateManager,
+  updateAdmin,
+  removeManager,
+  removeAdmin,
+  getEditAdmin,
+  getEditManager,
+  removeStudent,
 };

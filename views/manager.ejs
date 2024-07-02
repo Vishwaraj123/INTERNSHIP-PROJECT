@@ -6,7 +6,7 @@
     <title>Manager Dashboard</title>
 </head>
 <body>
-    <h1>Welcome, <%= user.fullName %></h1>
+    <h1>Welcome <%= user.fullName %></h1>
     <table border="1px">
         <thead>
             <tr>
@@ -14,8 +14,10 @@
                 <th>Username</th>
                 <th>HSC Percentage</th>
                 <th>Email</th>
+                <th>Phone</th>
                 <th>File</th>
                 <th>Actions</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +27,7 @@
                     <td><%= student.username %></td>
                     <td><%= student.hscPercentage %></td>
                     <td><%= student.email %></td>
+                    <td><%= student.phone %></td>
                     <td><a href="/students/download/<%= student._id %>">Download</a></td>
                     <% if (student.status === "Pending") { %>
                         <td>
@@ -34,6 +37,7 @@
                     <% } else { %>
                         <td><%= student.status %></td>
                     <% } %>
+                    <td><a href="/manager/edit/<%= student._id %>">Edit</a></td>
                 </tr>
             <% }) %>
         </tbody>
