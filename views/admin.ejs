@@ -16,34 +16,41 @@
                 <th>Username</th>
                 <th>HSC Percentage</th>
                 <th>Email</th>
+                <th>Phone</th>
                 <th>File</th>
                 <th>Review status</th>
-<<<<<<< HEAD
                 <th>Reviewed By</th>
-=======
->>>>>>> 20b4617010d28d388a8aff92db708bf6b65610de
             </tr>
         </thead>
         <tbody>
-            <% students.forEach((student) => { %>
+            <% allStudents.forEach((student) => { %>
                 <tr>
                     <td><%= student.fullName %></td>
                     <td><%= student.username %></td>
                     <td><%= student.hscPercentage %></td>
                     <td><%= student.email %></td>
+                    <td><%= student.phone %></td>
                     <td><a href="/students/download/<%= student._id %>">Download</a></td>
                     <td><%= student.status %></td>
+                    <td><%= student.reviewedBy %></td>
                 </tr>
             <% }) %>
         </tbody>
     </table>
 
     <h2>Managers</h2>
-    <ul>
-        <% managers.forEach((manager) => { %>
-            <li><%= manager.fullName %></li>
-        <% }) %>
-    </ul>
+<table border="1px">
+  <tr>
+    <th>Full Name</th>
+    <th>Username</th>
+  </tr>
+  <% allManagers.forEach((manager) => { %>
+    <tr>
+      <td><%= manager.fullName %></td>
+      <td><%= manager.username %></td>
+    </tr>
+  <% }) %>
+</table>
 
 </body>
 </html>
