@@ -18,7 +18,10 @@
                 <th>Email</th>
                 <th>File</th>
                 <th>Review status</th>
+<<<<<<< HEAD
                 <th>Reviewed By</th>
+=======
+>>>>>>> 20b4617010d28d388a8aff92db708bf6b65610de
             </tr>
         </thead>
         <tbody>
@@ -30,7 +33,6 @@
                     <td><%= student.email %></td>
                     <td><a href="/students/download/<%= student._id %>">Download</a></td>
                     <td><%= student.status %></td>
-                    <td><%= managerID.fullName %></td>
                 </tr>
             <% }) %>
         </tbody>
