@@ -1,7 +1,4 @@
-const Admin = require("../models/Admin");
 const Manager = require("../models/Manager");
-const Student = require("../models/Student");
-
 // Get all managers and students
 const getAllManagers = async (req, res) => {
   try {
@@ -13,8 +10,6 @@ const getAllManagers = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
-  getAllManagers
+  getAllManagers,
 };
