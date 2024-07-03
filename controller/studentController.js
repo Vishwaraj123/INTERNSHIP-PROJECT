@@ -20,7 +20,7 @@ exports.registerStudent = async (req, res) => {
     // Check if username already exists
     const existingStudent = await Student.findOne({ username: req.body.username });
     if (existingStudent) {
-      return res.status(400).json({ message: "Username already exists. Please choose a different username." });
+      return res.send(`<script> alert("Username already exists. Please choose a different username."); window.location.href="/register.html"</script>`)
     }
 
     // Create a new student object
@@ -43,10 +43,11 @@ exports.registerStudent = async (req, res) => {
 
     // Save the student to the database
     await student.save();
-    res.json({ message: "Your form has been submitted successfully" });
+    res.send(`<script>alert('Your form has been submitted successfully'); window.location.href="/login.html"</script>`);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "There was an error submitting your form" });
+    res.send(`<script>alert("There was an error submitting your form"); window.location.href="/register.html"</script>`);
+   
   }
 };
 

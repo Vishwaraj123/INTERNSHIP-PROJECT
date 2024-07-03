@@ -4,53 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Welcome, <%= user.fullName %> </h1>
+    <h1 class="text-center">Welcome, <%= user.fullName %> </h1>
 
-    <h2>Students</h2>
-    <table border="1px">
-        <thead>
+    <h2 class="mt-4">Students</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Username</th>
+                    <th>HSC Percentage</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>File</th>
+                    <th>Review status</th>
+                    <th>Reviewed By</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% allStudents.forEach((student) => { %>
+                    <tr>
+                        <td><%= student.fullName %></td>
+                        <td><%= student.username %></td>
+                        <td><%= student.hscPercentage %></td>
+                        <td><%= student.email %></td>
+                        <td><%= student.phone %></td>
+                        <td><a href="/students/download/<%= student._id %>">Download</a></td>
+                        <td><%= student.status %></td>
+                        <td><%= student.reviewedBy %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="mt-4">Managers</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
             <tr>
                 <th>Full Name</th>
                 <th>Username</th>
-                <th>HSC Percentage</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>File</th>
-                <th>Review status</th>
-                <th>Reviewed By</th>
             </tr>
-        </thead>
-        <tbody>
-            <% allStudents.forEach((student) => { %>
+            <% allManagers.forEach((manager) => { %>
                 <tr>
-                    <td><%= student.fullName %></td>
-                    <td><%= student.username %></td>
-                    <td><%= student.hscPercentage %></td>
-                    <td><%= student.email %></td>
-                    <td><%= student.phone %></td>
-                    <td><a href="/students/download/<%= student._id %>">Download</a></td>
-                    <td><%= student.status %></td>
-                    <td><%= student.reviewedBy %></td>
+                    <td><%= manager.fullName %></td>
+                    <td><%= manager.username %></td>
                 </tr>
             <% }) %>
-        </tbody>
-    </table>
-
-    <h2>Managers</h2>
-<table border="1px">
-  <tr>
-    <th>Full Name</th>
-    <th>Username</th>
-  </tr>
-  <% allManagers.forEach((manager) => { %>
-    <tr>
-      <td><%= manager.fullName %></td>
-      <td><%= manager.username %></td>
-    </tr>
-  <% }) %>
-</table>
+        </table>
+    </div>
 
 </body>
 </html>

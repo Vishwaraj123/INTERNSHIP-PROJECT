@@ -1,111 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Admin Dashboard</title>
-</head>
-<body>
-    <h1>Welcome, <%= user.fullName %> </h1>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: auto;
+            max-width: 1000px;
+            text-align: center;
+            font-size: 15px;
+        }
 
-    <h2>Students</h2>
-    <table border="1px">
-        <thead>
+        .create-manager-form {
+            float: left;
+            /* float the form to the right */
+            width: 35%;
+            /* adjust the width of the form to fit the available space */
+            margin-left: 20px;
+            /* add some space between the table and the form */
+            padding: 20px;
+            /* add some padding to the form */
+            background-color: #f9f9f9;
+            /* add a light gray background color */
+            border: 1px solid #ddd;
+            /* add a light gray border */
+            border-radius: 10px;
+            /* add a rounded corner effect */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* add a subtle shadow effect */
+        }
+
+        .form-group label {
+            width: 100%;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+        }
+
+        .form-group input[type="submit"] {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="text-center">Welcome, <%= user.fullName %>
+    </h1>
+
+    <h2 class="mt-4">Students</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Username</th>
+                    <th>HSC Percentage</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>File</th>
+                    <th>Review status</th>
+                    <th>Reviewed By</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% allStudents.forEach((student)=> { %>
+                    <tr>
+                        <td>
+                            <%= student.fullName %>
+                        </td>
+                        <td>
+                            <%= student.username %>
+                        </td>
+                        <td>
+                            <%= student.hscPercentage %>
+                        </td>
+                        <td>
+                            <%= student.email %>
+                        </td>
+                        <td>
+                            <%= student.phone %>
+                        </td>
+                        <td><a href="/students/download/<%= student._id %>">Download</a></td>
+                        <td>
+                            <%= student.status %>
+                        </td>
+                        <td>
+                            <%= student.reviewedBy %>
+                        </td>
+                        <td><a href="/manager/edit/<%= student._id %>">Edit</a></td>
+                        <td><button class="btn btn-danger"
+                                onclick="window.location.href='/superadmin/deleteStudent/<%= student._id %>'">Delete</button>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="mt-4">Managers</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
             <tr>
                 <th>Full Name</th>
                 <th>Username</th>
-                <th>HSC Percentage</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>File</th>
-                <th>Review status</th>
-                <th>Reviewed By</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
-        </thead>
-        <tbody>
-            <% allStudents.forEach((student) => { %>
+            <% allManagers.forEach((manager)=> { %>
                 <tr>
-                    <td><%= student.fullName %></td>
-                    <td><%= student.username %></td>
-                    <td><%= student.hscPercentage %></td>
-                    <td><%= student.email %></td>
-                    <td><%= student.phone %></td>
-                    <td><a href="/students/download/<%= student._id %>">Download</a></td>
-                    <td><%= student.status %></td>
-                    <td><%= student.reviewedBy %></td>
-                    <td><a href="/manager/edit/<%= student._id %>">Edit</a></td>
-                    <td><a href="/superadmin/deleteStudent/<%= student._id %>">Delete</a></td>
+                    <td>
+                        <%= manager.fullName %>
+                    </td>
+                    <td>
+                        <%= manager.username %>
+                    </td>
+                    <td><a href="/superadmin/editManager/<%= manager._id %>">Edit</a></td>
+                    <td><button class="btn btn-danger"
+                            onclick="window.location.href='/superadmin/deleteManager/<%= manager._id %>'">Delete</button>
+                    </td>
                 </tr>
-            <% }) %>
-        </tbody>
-    </table>
-
-    
-
-    <h2>Managers</h2>
-<table border="1px">
-  <tr>
-    <th>Full Name</th>
-    <th>Username</th>
-   
-  </tr>
-  <% allManagers.forEach((manager) => { %>
-    <tr>
-      <td><%= manager.fullName %></td>
-      <td><%= manager.username %></td>
-     
-      <td><a href="/superadmin/editManager/<%= manager._id %>">Edit</a></td>
-      <td><a href="/superadmin/deleteManager/<%= manager._id %>">Delete</a></td>
-    </tr>
-  <% }) %>
-</table>
-    <h2>Create Manager</h2>
-    <form action="/superadmin/createManager" method="POST">
-        <label for="fullName">Full Name:</label>
-        <input type="text" id="fullName" name="fullName" required><br>
-
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
-
-        <input type="submit" value="Create Manager">
-    </form>
+                <% }) %>
+        </table>
+    </div>
 
 
 
-<h2>Admins</h2>
-<table border="1px">
-    <tr>
-        <th>Full Name</th>
-        <th>Username</th>
-       
-      </tr>
-      <% allAdmins.forEach((admin) => { %>
-        <tr>
-          <td><%= admin.fullName %></td>
-          <td><%= admin.username %></td>
-    
-          <td><a href="/superadmin/editAdmin/<%= admin._id %>">Edit</a></td>
-          <td><a href="/superadmin/deleteAdmin/<%= admin._id %>">Delete</a></td>
-        </tr>
-      <% }) %>
-</table>
-<h2>Create Admin</h2>
-    <form action="/superadmin/createAdmin" method="POST">
-        <label for="fullName">Full Name:</label>
-        <input type="text" id="fullName" name="fullName" required><br>
 
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
+    <h2 class="mt-4">Admins</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Full Name</th>
+                <th>Username</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <% allAdmins.forEach((admin)=> { %>
+                <tr>
+                    <td>
+                        <%= admin.fullName %>
+                    </td>
+                    <td>
+                        <%= admin.username %>
+                    </td>
+                    <td><a href="/superadmin/editAdmin/<%= admin._id %>">Edit</a></td>
+                    <td><button class="btn btn-danger"
+                            onclick="window.location.href='/superadmin/deleteAdmin/<%= admin._id %>'">Delete</button>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+    </div>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
 
-        <input type="submit" value="Create Admin">
-    </form>
+
+    <div class="create-manager-form">
+        <h2 class="mt-4">Create Manager</h2>
+        <div class="container">
+            <form action="/superadmin/createManager" method="POST" class="form-horizontal">
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create Manager" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="create-manager-form">
+        <h2 class="mt-4">Create Admin</h2>
+        <div class="container">
+            <form action="/superadmin/createAdmin" method="POST" class="form-horizontal">
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create Admin" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
 
 
 </body>
+
 </html>

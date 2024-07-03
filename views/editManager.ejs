@@ -3,17 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit manager</title>
+    <title>Edit Manager</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+       body {
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .control-label {
+      font-weight: bold;
+      width: 100%;
+    }
+    input[type="text"], input[type="email"], input[type="date"], input[type="tel"] {
+      width: 100%;
+      height: 40px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button[type="submit"] {
+      width: 100%;
+      height: 40px;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #337ab7;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover {
+      background-color: #23527c;
+    }
+    </style>
 </head>
 <body>
-    <form action="/superadmin/<%= manager._id %>/editManager" method="post">
-        <label for="fullName">Full Name:</label>
-        <input type="text" id="fullName" name="fullName" value="<%= manager.fullName %>" required>
-        <br>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="<%= manager.username %>" required>
-        <br>
-        <button type="submit">Update Student Details</button>
-      </form>
+    <div class="container">
+        <form action="/superadmin/<%= manager._id %>/editManager" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" value="<%= manager.fullName %>" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="<%= manager.username %>" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update Manager Details</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

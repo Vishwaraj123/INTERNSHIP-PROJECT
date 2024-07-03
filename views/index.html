@@ -1,13 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University Application</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <!-- Font Import -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <!-- Custom CSS -->
+  <style>
+    /* Add some padding to the body */
+    body {
+      padding-top: 10px;
+    }
+
+    /* Make the navbar sticky */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgb(200, 210, 210);
+      font-size: 22px;
+    }
+
+    /* Add some margin to the hero section */
+    .hero {
+      margin-top: 20px;
+    }
+
+    /* Make the hero image full width */
+    .hero-overlay img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+
+    /* Add some padding to the about section */
+    .about {
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
+    /* Make the about image full width */
+    .about img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    /* Add some padding to the programs section */
+    .programs {
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
+    /* Make the program cards more stylish */
+    .card {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    /* Add some padding to the contact section */
+    .contact {
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
+    /* Make the contact form more stylish */
+    .form-control {
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .btn-primary {
+      background-color: #337ab7;
+      border-color: #2e6da4;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 10px;
+    }
+
+    .btn-primary:hover {
+      background-color: #23527c;
+      border-color: #1d4e7a;
+    }
+
+    /* Add some padding to the footer */
+    .footer {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .footer ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer li {
+      display: inline-block;
+      margin-right: 20px;
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: #ccc;
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Welcome to the Student Registration System</h1>
-    <button onclick="window.location.href='/register.html'">Go to Student Registration</button>
-    <button onclick="window.location.href='/login.html'">login</button>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">University</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#programs">Programs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Admissions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Contact</a>
+        </li>
+        <li>
+          <button class="btn btn-primary" onclick="window.location.href='/register.html'">
+            Register Here
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-primary" onclick="window.location.href='/login.html'">
+            login
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero text-black bg-light text-center">
+    <div class="container">
+      <h1>Welcome to Our University</h1>
+      <p class="lead">Empowering Students for a Brighter Future</p>
+      <a href="register.html" class="btn btn-light btn-lg">Get Started</a>
+      <div class="hero-overlay">
+        <img src="https://gtuinnovationcouncil.ac.in/images/backgrounds/GTU_CAMPUS_6.webp" alt="University Image"
+          class="img-fluid" />
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>About Us</h2>
+          <p>
+            We are a prestigious university dedicated to providing
+            high-quality education and fostering research and innovation.
+          </p>
+          <ul class="list-unstyled">
+            <li>
+              <i class="fas fa-check-circle"></i> High-quality education
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> Research and innovation
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i> State-of-the-art facilities
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <img
+            src="https://images.freeimages.com/images/large-previews/701/my-university-library-3-1442034.jpg?fmt=webp&w=500"
+            class="img-fluid" alt="University Image" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs Section -->
+  <section id="programs" class="programs bg-light py-5">
+    <div class="container">
+      <h2 class="text-center">Our Programs</h2>
+      <p class="text-center">Explore our diverse programs</p>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <img
+              src="https://media.istockphoto.com/id/1328847023/photo/female-student-going-for-class-in-high-school.jpg?s=612x612&w=0&k=20&c=L7LkV_z5WNLFSHu79_XZ3HoqgiT5TJ5fcRkM8oaNOFU="
+              class="card-img-top" alt="Program Image" />
+            <div class="card-body">
+              <h5 class="card-title">Undergraduate</h5>
+              <p class="card-text">
+                Explore our diverse undergraduate programs designed to build a
+                strong foundation for your career.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <img
+              src="https://media.istockphoto.com/id/1371896330/photo/happy-asian-woman-in-his-graduation-day.jpg?s=612x612&w=0&k=20&c=Ur3moWl1fKFms-6UACseglMjoYAynYKzsanZpgK8lFk="
+              class="card-img-top" alt="Program Image" />
+            <div class="card-body">
+              <h5 class="card-title">Graduate</h5>
+              <p class="card-text">
+                Advance your knowledge and skills with our specialized
+                graduate programs.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <img
+              src="https://media.istockphoto.com/id/624695614/photo/university-students-doing-group-study.jpg?s=612x612&w=0&k=20&c=4Renn4AMIZtZnmbkgDKmkDZaLkImg5SFtGd2X4W9hGg="
+              class="card-img-top" alt="Program Image" />
+            <div class="card-body">
+              <h5 class="card-title">PhD</h5>
+              <p class="card-text">
+                Pursue cutting-edge research and make significant
+                contributions to your field.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact py-5">
+    <div class="container">
+      <h2 class="text-center">Contact Us</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter your name" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter your email" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea class="form-control" id="message" rows="3" placeholder="Enter your message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <h5>Address</h5>
+          <p>123 University Ave, Khambhat, India</p>
+          <h5>Email</h5>
+          <p>vkdhummad@university.com</p>
+          <h5>Phone</h5>
+          <p>+91 97222 83222</p>
+          <ul class="list-unstyled">
+            <li>
+              <i class="fab fa-facebook-f"></i> <a href="#">Facebook</a>
+            </li>
+            <li><i class="fab fa-twitter"></i> <a href="#">Twitter</a></li>
+            <li>
+              <i class="fab fa-instagram"></i> <a href="#">Instagram</a>
+            </li>
+            <li>
+              <i class="fab fa-linkedin-in"></i> <a href="#">LinkedIn</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2024 University. All rights reserved.</p>
+    <ul class="list-inline mb-0">
+      <li class="list-inline-item">
+        <a href="#" class="text-white">Terms of Use</a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="text-white">Privacy Policy</a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="text-white">Accessibility</a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="text-white">Site Map</a>
+      </li>
+    </ul>
+    <ul class="list-inline mb-0">
+      <li class="list-inline-item">
+        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+      </li>
+    </ul>
+  </footer>
+
+  <!-- Bootstrap JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
