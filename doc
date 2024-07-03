@@ -11,13 +11,14 @@ INTERNSHIP_PROJECT/
 │   └── config.js          # Configuration file (e.g., secret keys, database connection)
 │
 ├── controllers/
-│   ├── adminController.js # Controller for admin actions
-│   ├── managerController.js # Controller for manager actions
-│   ├── studentController.js # Controller for student actions
+│   ├── authController.js         # Controller for authentication actions
+│   ├── managerController.js     # Controller for manager actions
+│   ├── studentController.js     # Controller for student actions
 │   └── superAdminController.js # Controller for super admin actions
 │
 ├── middleware/
-│   └── auth.js            # Authentication and authorization middleware
+│   ├── auth.js            # Authentication and authorization middleware
+│   └── checkRole.js       # Middleware to check user role
 │
 ├── models/
 │   ├── Admin.js           # Model for Admin
@@ -29,10 +30,13 @@ INTERNSHIP_PROJECT/
 │   └── ...                # Dependencies (installed via npm)
 │
 ├── routes/
-│   ├── adminRoutes.js     # Routes for admin actions
+│   ├── authRoutes.js      # Routes for authentication actions
 │   ├── managerRoutes.js   # Routes for manager actions
 │   ├── studentRoutes.js   # Routes for student actions
 │   └── superAdminRoutes.js # Routes for super admin actions
+│
+├── public/
+│   └── ...                # Static files
 │
 ├── uploads/
 │   └── ...                # Uploaded files storage
@@ -48,3 +52,4 @@ INTERNSHIP_PROJECT/
 ├── package.json           # Package configuration (dependencies, scripts)
 ├── package-lock.json      # Dependency lock file
 └── README.md              # Project documentation
+
