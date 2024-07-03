@@ -4,34 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Open Sans, sans-serif;
+            background-color: #f7f7f7;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+        }
+        .header h1 {
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+        .details {
+            margin-bottom: 20px;
+        }
+        .details label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .details p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .details .icon {
+            font-size: 24px;
+            margin-right: 10px;
+            color: #a8e6ec;
+        }
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px auto;
+                padding: 20px;
+            }
+            .details {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome, <%= user.fullName %></h1>
-        <%= loggedInUserId %>
-        <div class="details">
-            <label>Full Name:</label>
-            <p><%= user.fullName %></p>
+        <div class="header">
+            <h1>Welcome, <%= user.fullName %></h1>
         </div>
-        <div class="details">
-            <label>Username:</label>
-            <p><%= user.username %></p>
-        </div>
-        <div class="details">
-            <label>Date of Birth:</label>
-            <p><%= new Date(user.dob).toDateString() %></p>
-        </div>
-        <div class="details">
-            <label>Email:</label>
-            <p><%= user.email %></p>
-        </div>
-        <div class="details">
-            <label>Phone:</label>
-            <p><%= user.phone %></p>
-        </div>
-        <div class="details">
-            <label>HSC Percentage:</label>
-            <p><%= user.hscPercentage %></p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="details">
+                    <label><i class="fas fa-user icon"></i>Full Name:</label>
+                    <p><%= user.fullName %></p>
+                </div>
+                <div class="details">
+                    <label><i class="fas fa-user-circle icon"></i>Username:</label>
+                    <p><%= user.username %></p>
+                </div>
+                <div class="details">
+                    <label><i class="fas fa-birthday-cake icon"></i>Date of Birth:</label>
+                    <p><%= new Date(user.dob).toDateString() %></p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="details">
+                    <label><i class="fas fa-envelope icon"></i>Email:</label>
+                    <p><%= user.email %></p>
+                </div>
+                <div class="details">
+                    <label><i class="fas fa-phone icon"></i>Phone:</label>
+                    <p><%= user.phone %></p>
+                </div>
+                <div class="details">
+                    <label><i class="fas fa-graduation-cap icon"></i>HSC Percentage:</label>
+                    <p><%= user.hscPercentage %></p>
+                </div>
+            </div>
         </div>
     </div>
 </body>
