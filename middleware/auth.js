@@ -1,13 +1,5 @@
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { secretKey } = require("../config/config"); // Adjust path as per your configuration
-const Student = require("../models/Student");
-const Manager = require("../models/Manager");
-const Admin = require("../models/Admin");
-const SuperAdmin = require("../models/SuperAdmin");
-const { getAllStudents } = require("../controller/managerController");
-const { getAllManagers } = require("../controller/adminController");
-const managerRoutes = require("../routes/managerRoutes");
 const express = require("express");
 const MongoStore = require("connect-mongo");
 const app = express();

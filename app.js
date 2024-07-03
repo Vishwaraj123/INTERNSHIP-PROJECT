@@ -1,18 +1,15 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const auth = require("./middleware/auth");
 const bodyParser = require("body-parser");
 const path = require("path");
 const authRoutes = require("./routes/authRoutes");
 const studentRoutes = require("./routes/studentRoutes");
 const managerRoutes = require("./routes/managerRoutes");
-const adminRoutes = require("./routes/adminRoutes");
 const superAdminRoutes = require("./routes/superAdminRoutes");
 const {login} = require('./controller/loginController')
 const session = require('express-session');
 const { secretKey } = require("./config/config");
-const SuperAdmin = require("./models/SuperAdmin");
 
 
 app.use(bodyParser.json()); // Parse JSON requests
