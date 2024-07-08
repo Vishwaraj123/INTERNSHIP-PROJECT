@@ -4,26 +4,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student edit</title>
+  <title>Student Edit</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .control-label {
+      font-weight: bold;
+      width: 100%;
+    }
+    input[type="text"], input[type="email"], input[type="date"], input[type="tel"] {
+      width: 100%;
+      height: 40px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button[type="submit"] {
+      width: 100%;
+      height: 40px;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #337ab7;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover {
+      background-color: #23527c;
+    }
+  </style>
 </head>
 
 <body>
-  <form action="/manager/<%= student._id %>/edit" method="post">
-    <label for="fullName">Full Name:</label>
-    <input type="text" id="fullName" name="fullName" value="<%= student.fullName %>" required>
-    <br>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" value="<%= student.email %>" required>
-    <br>
-    <label for="dob">Date Of Birth:</label>
-    <input type="date" id="dob" name="dob" value="<%= student.dob.toISOString().split('T')[0] %>" required>
-    <br>
-    <label for="phone">Phone Number:</label>
-    <input type="tel" id="phone" name="phone" value="<%= student.phone %>" required>
-
-    <button type="submit">Update Student Details</button>
-  </form>
+  <div class="container">
+    <form action="/manager/<%= student._id %>/edit" method="post" class="form-horizontal">
+      <div class="form-group">
+        <label for="fullName" class="control-label">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" value="<%= student.fullName %>" required>
+      </div>
+      <div class="form-group">
+        <label for="email" class="control-label">Email:</label>
+        <input type="email" id="email" name="email" value="<%= student.email %>" required>
+      </div>
+      <div class="form-group">
+        <label for="dob" class="control-label">Date Of Birth:</label>
+        <input type="date" id="dob" name="dob" value="<%= student.dob.toISOString().split('T')[0] %>" required>
+      </div>
+      <div class="form-group">
+        <label for="phone" class="control-label">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" value="<%= student.phone %>" required>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Update Student Details</button>
+      </div>
+    </form>
+  </div>
 </body>
 
 </html>
