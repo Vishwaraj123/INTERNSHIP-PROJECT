@@ -1,11 +1,4 @@
-Student Details
-Full name 
-dob
-email
-phone
-hsc percentage
-file
-INTERNSHIP_PROJECT/
+Student-Application-Management-System/
 │
 ├── config/
 │   └── config.js          # Configuration file (e.g., secret keys, database connection)
